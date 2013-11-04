@@ -26,20 +26,22 @@ You can see [the package information on Packagist.](https://packagist.org/packag
 Usage
 -----
 
-### getCurrency: returns a string with the most common currency
+### getCurrency
+Returns a string with the most common currency.
 
 ```php
 $detector = new Detector();
 echo $detector->getCurrency('11.10$');
-\\Returns: USD
+//Returns: USD
 ```
 
-### getCurrencies: returns all the currencies suitable for this string
+### getCurrencies
+Returns all the currencies suitable for this string.
 
 ```php
 $detector = new Detector();
 echo $detector->getCurrencies('11.10$');
-\\Returns: ['USD', 'AUD', 'CAD', ...]
+//Returns: ['USD', 'AUD', 'CAD', ...]
 ```
 
 Tests
