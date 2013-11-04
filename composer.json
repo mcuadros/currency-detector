@@ -1,7 +1,7 @@
 {
     "name": "mcuadros/currency-detector",
     "type": "library",
-    "description": "Class to detect currency from any string",
+    "description": "Class to detect the currency from any string",
     "license": "MIT",
     "authors": [
         {
