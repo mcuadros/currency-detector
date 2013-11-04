@@ -1,0 +1,21 @@
+{
+    "name": "mcuadros/currency-detector",
+    "type": "library",
+    "description": "Class to detect currency from any string",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Máximo Cuadros", 
+            "email": "mcuadros@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "CurrencyDetector": "src/"
+        }
+    }
+}
