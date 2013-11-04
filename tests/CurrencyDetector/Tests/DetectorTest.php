@@ -21,7 +21,7 @@ class DetectorTest extends TestCase
         $detector = new Detector();
         $result = $detector->getAmount($input);
 
-        $this->assertSame($result, $expected);
+        $this->assertSame($expected, $result);
     }
 
     public function providerGetAmount()
@@ -33,9 +33,10 @@ class DetectorTest extends TestCase
             ['£1.10', 1.10],
             ['$123 456 789', 123456789.0],
             ['$123,456,789.12', 123456789.12],
-            ['$123 456 789,12', 123456789.12],
             ['1.10', 1.1],
-            [',,,,.10', .1]
+            [',,,,.10', .1],
+            ['1.000', 1000.0],
+            ['1,000', 1000.0]
         );
     }
 
