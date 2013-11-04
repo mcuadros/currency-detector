@@ -13,6 +13,32 @@ use CurrencyDetector\Detector;
 
 class DetectorTest extends TestCase
 {
+    /**
+     * @dataProvider providerGetAmount
+     */
+    public function testGetAmount($input, $expected)
+    {
+        $detector = new Detector();
+        $result = $detector->getAmount($input);
+
+        $this->assertSame($result, $expected);
+    }
+
+    public function providerGetAmount()
+    {
+        return array(
+            ['1,10 USD', 1.10],
+            ['1 000 000.00', 1000000.0],
+            ['$1 000 000.21', 1000000.21],
+            ['£1.10', 1.10],
+            ['$123 456 789', 123456789.0],
+            ['$123,456,789.12', 123456789.12],
+            ['$123 456 789,12', 123456789.12],
+            ['1.10', 1.1],
+            [',,,,.10', .1]
+        );
+    }
+
     public function testGetCurrencies()
     {
         $detector = new Detector();
@@ -22,7 +48,7 @@ class DetectorTest extends TestCase
     }
 
     /**
-     * @dataProvider provider
+     * @dataProvider providerGetCurrency
      */
     public function testGetCurrency($string, $code)
     {
@@ -32,7 +58,7 @@ class DetectorTest extends TestCase
         $this->assertSame($result, $code);
     }
 
-    public function provider()
+    public function providerGetCurrency()
     {
         return array(
             ['1,10 USD', 'USD'],

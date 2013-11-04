@@ -44,6 +44,17 @@ echo $detector->getCurrencies('11.10$');
 //Returns: ['USD', 'AUD', 'CAD', ...]
 ```
 
+### getAmount
+Return a money string as a float
+
+```php
+$detector = new Detector();
+echo $detector->getAmount('11,10.00$');
+//Returns: 1110.00
+```
+
+$123 456 789,12
+
 Tests
 -----
 
