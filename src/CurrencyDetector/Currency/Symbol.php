@@ -1,9 +1,30 @@
 <?php
+/*
+ * This file is part of the CurrencyDetector.
+ *
+ * (c) Máximo Cuadros <mcuadros@mcuadros.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace CurrencyDetector\Currency;
+use ReflectionClass;
 
 class Symbol
 {
+    /**
+     * United Kingdom Pound
+     * @var string
+     */
+    const GBP = '£';
+
+    /**
+     * United States Dollar
+     * @var string
+     */
+    const USD = '$';
+
     /**
      * Albania Lek
      * @var string
@@ -278,7 +299,7 @@ class Symbol
      * India Rupee
      * @var string
      */
-    const INR = '';
+    const INR = '₹';
 
     /**
      * Indonesia Rupiah
@@ -449,12 +470,6 @@ class Symbol
     const NGN = '₦';
 
     /**
-     * Korea (North) Won
-     * @var string
-     */
-    const KPW = '₩';
-
-    /**
      * Norway Krone
      * @var string
      */
@@ -569,12 +584,6 @@ class Symbol
     const ZAR = 'R';
 
     /**
-     * Korea (South) Won
-     * @var string
-     */
-    const KRW = '₩';
-
-    /**
      * Sri Lanka Rupee
      * @var string
      */
@@ -626,12 +635,6 @@ class Symbol
      * Turkey Lira
      * @var string
      */
-    const TRY = '';
-
-    /**
-     * Turkey Lira
-     * @var string
-     */
     const TRL = '₤';
 
     /**
@@ -645,18 +648,6 @@ class Symbol
      * @var string
      */
     const UAH = '₴';
-
-    /**
-     * United Kingdom Pound
-     * @var string
-     */
-    const GBP = '£';
-
-    /**
-     * United States Dollar
-     * @var string
-     */
-    const USD = '$';
 
     /**
      * Uruguay Peso
@@ -693,4 +684,39 @@ class Symbol
      * @var string
      */
     const ZWD = 'Z$';
+
+    static public function getSymbols()
+    {
+        $class = new ReflectionClass(__CLASS__);
+
+        $symbolsByComplex = [];
+        foreach($class->getConstants() as $code => $symbol) {
+            $complexity = static::getSymbolComplexity($symbol);
+            $symbolsByComplex[$complexity][$symbol][] = $code;
+        }
+
+        krsort($symbolsByComplex);
+
+        $symbols = [];
+        foreach ($symbolsByComplex as $array) {
+            $symbols = array_merge($symbols, $array);
+        }
+
+        return $symbols;
+    }
+
+    static protected function getSymbolComplexity($symbol)
+    {
+        $sum = 0;
+        for ($i=0; $i < strlen($symbol); $i++) { 
+            $code = ord($symbol[$i]);
+            if ($code > 128 || ord($symbol[$i]) == 36) {
+                $sum += 100;
+            } else {
+                $sum += 1;
+            }
+        }
+
+        return $sum;
+    }
 }

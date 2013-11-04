@@ -1,6 +1,15 @@
 <?php
+/*
+ * This file is part of the CurrencyDetector.
+ *
+ * (c) Máximo Cuadros <mcuadros@mcuadros.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace CurrencyDetector\Currency;
+use ReflectionClass;
 
 class Code
 {
@@ -335,12 +344,6 @@ class Code
     const KPW = 'Korea (North) Won';
 
     /**
-     * Korea (South) Won
-     * @var string
-     */
-    const KRW = 'Korea (South) Won';
-
-    /**
      * Kyrgyzstan Som
      * @var string
      */
@@ -447,12 +450,6 @@ class Code
      * @var string
      */
     const NGN = 'Nigeria Naira';
-
-    /**
-     * Korea (North) Won
-     * @var string
-     */
-    const KPW = 'Korea (North) Won';
 
     /**
      * Norway Krone
@@ -626,12 +623,6 @@ class Code
      * Turkey Lira
      * @var string
      */
-    const TRY = 'Turkey Lira';
-
-    /**
-     * Turkey Lira
-     * @var string
-     */
     const TRL = 'Turkey Lira';
 
     /**
@@ -693,4 +684,16 @@ class Code
      * @var string
      */
     const ZWD = 'Zimbabwe Dollar';
+
+    static public function getCodes()
+    {
+        $class = new ReflectionClass(__CLASS__);
+
+        $codes = [];
+        foreach($class->getConstants() as $code => $symbol) {
+            $codes[$code][] = $code;
+        }
+
+        return $codes;
+    }
 }
