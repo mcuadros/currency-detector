@@ -53,8 +53,6 @@ echo $detector->getAmount('11,10.00$');
 //Returns: 1110.00
 ```
 
-$123 456 789,12
-
 Tests
 -----
 
