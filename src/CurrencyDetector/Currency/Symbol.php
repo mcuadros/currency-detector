@@ -77,7 +77,7 @@ class Symbol
      * Belarus Ruble
      * @var string
      */
-    const BYR = 'p.';
+    const BYN = 'p.';
 
     /**
      * Belize Dollar
