@@ -65,7 +65,7 @@ class Code
      * Belarus Ruble
      * @var string
      */
-    const BYR = 'Belarus Ruble';
+    const BYN = 'Belarus Ruble';
 
     /**
      * Belize Dollar
